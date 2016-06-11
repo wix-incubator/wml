@@ -4,17 +4,17 @@
 
 Wmlink listens to changes in some folder (using [watchman](https://facebook.github.io/watchman/)) and copies changed files to another folder.
 
-## why?
+## Why?
 
 todo
 
-## install
+## Install
 
 ```sh
 npm install -g wmlink
 ```
 
-## usage
+## Usage
 
 ```sh
 # add the link to wmlink using `wmlink add <src> <dest>`
@@ -23,7 +23,7 @@ wmlink add ~/my-package ~/main-project/node_modules/my-package
 wmlink start
 ```
 
-### commands
+### Commands
 
 #### add
 
@@ -67,6 +67,6 @@ Enables a link.
 Disables a link.
 Great for re-using old links without having to type them over and over again.
 
-## developing
+## Developing
 
 todo
