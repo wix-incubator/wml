@@ -18,7 +18,7 @@ exports.handler = function () {
 	for (var linkId in watchers.data) {
 		var watcher = watchers.data[linkId];
 		var status = watcher.enabled ? 'enabled'.green : 'disabled'.red;
-		console.log(`[${status}] (${linkId}) ${watcher.src} -> ${watcher.dest}`);
+		console.log(`${status} (${linkId}) ${watcher.src} -> ${watcher.dest}`);
 		found = true;
 	}
 

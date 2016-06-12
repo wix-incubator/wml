@@ -18,60 +18,98 @@ exports.describe = 'Starts watching all links';
 
 exports.builder = {};
 
-function watchForWatcherChanges(onChange) {
-	subscribe(function(resp) {
-		if (resp.subscription === 'mysubscription') {
-			var hasWatchersChanged = resp.files.some(function (file) {
-				return file.name === 'watchers.json'
-			});
+function onWatchersChange(onChange, resp) {
+	if (resp.subscription === 'mysubscription') {
+		var hasWatchersChanged = resp.files.some(function (file) {
+			return file.name === 'watchers.json'
+		});
 
-			if (hasWatchersChanged) {
-				onChange();
-			}
+		if (hasWatchersChanged) {
+			onChange();
 		}
-	})({
-		watchProject: {
-			watch: path.resolve(__dirname, '../')
-		},
+	}
+}
+
+function watchForWatcherChanges(onChange) {
+	var watchersPath = path.resolve(__dirname, '../');
+	return subscribe({
 		client: new watchman.Client(),
-		config: {
-			src: path.resolve(__dirname, '../')
-		}
+		watch: watchersPath,
+		src: watchersPath,
+		handler: onWatchersChange.bind(this, onChange)
 	});
 }
 
-exports.handler = function () {
+exports.handler = () => {
 	watchers.load();
 
-	watchForWatcherChanges(function () {
+	watchForWatcherChanges(() => {
 		console.log('change!');
 	});
 
 	for (var i in watchers.data) {
-		var watcher = watchers.data[i],
-		    params = {};
+		var watcher = watchers.data[i];
 
 		if (watcher.enabled) {
-			params.config = {
-				src: watcher.src,
-				dest: watcher.dest
-			};
-			params.client = new watchman.Client();
+			var client = new watchman.Client(),
+			    relativePath,
+			    watch;
 
-			capabilityCheck(params)
-				.then(watchProject)
-				.then(getConfig)
-				.then(subscribe(copyHandler({
-					src: watcher.src,
-					dest: watcher.dest
-				})))
-				.then(() => {}, (err) => {
-					var error = err.watchmanResponse
-						? err.watchmanResponse.error
-						: err;
+			capabilityCheck({
+				client: client
+			}).then(() => {
 
-					console.log('[error]'.red, error);
+				return watchProject({
+					client: client,
+					src: watcher.src
 				});
+
+			}).then((resp) => {
+
+				if ('warning' in resp) {
+					console.log('[watch-warning]'.yellow, resp.warning);
+				}
+
+				console.log('[watch]'.green, resp.watch);
+
+				relativePath = resp.relative_path;
+				watch = resp.watch;
+
+				return getConfig({
+					client: client,
+					src: watcher.src
+				});
+
+			}).then((resp) => {
+
+				console.log('[watch-config]'.green, resp.config);
+
+				return subscribe({
+					client: client,
+					watch: watch,
+					relativePath: relativePath,
+					src: watcher.src,
+					handler: copyHandler({
+						src: watcher.src,
+						dest: watcher.dest
+					})
+				});
+
+			}).then(() => {
+				console.log('[subscribe]'.green, watcher.src);
+			}, (err) => {
+
+				client.end();
+
+				var error = err.watchmanResponse
+					? err.watchmanResponse.error
+					: err;
+
+				console.log('[error]'.red, error);
+
+				throw err;
+
+			}).done();
 		}
 	}
 };
