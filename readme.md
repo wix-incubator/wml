@@ -1,6 +1,6 @@
-# wml
+# <img src="media/logo.png" width="72">
 
-> Use wml (watchman-link) when symlinks simply aren't enough
+> Tangible symlinks
 
 Wml listens to changes in some folder (using [watchman](https://facebook.github.io/watchman/)) and copies changed files to another folder.
 
