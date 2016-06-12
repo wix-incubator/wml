@@ -1,8 +1,8 @@
-# wmlink
+# wml
 
-> Use wmlink when symlinks simply aren't enough
+> Use wml (watchman-link) when symlinks simply aren't enough
 
-Wmlink listens to changes in some folder (using [watchman](https://facebook.github.io/watchman/)) and copies changed files to another folder.
+Wml listens to changes in some folder (using [watchman](https://facebook.github.io/watchman/)) and copies changed files to another folder.
 
 ## Why?
 
@@ -11,58 +11,58 @@ todo
 ## Install
 
 ```sh
-npm install -g wmlink
+npm install -g wml
 ```
 
 ## Usage
 
 ```sh
-# add the link to wmlink using `wmlink add <src> <dest>`
-wmlink add ~/my-package ~/main-project/node_modules/my-package
+# add the link to wml using `wml add <src> <dest>`
+wml add ~/my-package ~/main-project/node_modules/my-package
 # start watching all links added
-wmlink start
+wml start
 ```
 
-### Commands
+## Commands
 
 #### add
 
-`wmlink add <src> <dest>`
+`wml add <src> <dest>`
 
 Adds a link.
-wmlink will not start listening to changes until you start it by running `wmlink start`.
-Eace link is given an unique id, you can see all links and their ids by running `wmlink list`.
+wml will not start listening to changes until you start it by running `wml start`.
+Eace link is given an unique id, you can see all links and their ids by running `wml list`.
 
 #### rm
 
-`wmlink rm <linkId>`
+`wml rm <linkId>`
 
 Removes a link.
 
 #### start
 
-`wmlink start`
+`wml start`
 
-Starts wmlink.
+Starts wml.
 
 It first copies all watched files from source to destination folder and then waits for new changes to happen.
 
 #### list
 
-`wmlink list`
+`wml list`
 
-Lists all wmlink.
+Lists all wml.
 Shows link's id, state and source/destination folders.
 
 #### enable
 
-`wmlink enable <linkId>`
+`wml enable <linkId>`
 
 Enables a link.
 
 #### disable
 
-`wmlink disable <linkId>`
+`wml disable <linkId>`
 
 Disables a link.
 Great for re-using old links without having to type them over and over again.

@@ -1,12 +1,12 @@
 {
-  "name": "wmlink",
+  "name": "wml",
   "version": "0.0.0",
   "description": "Replaces npm link with something that actually works!",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "wmlink": "./src/cli/wmlink-cli.js"
+    "wml": "./src/cli/wml-cli.js"
   },
   "author": "dutzi <dutzi@wix.com> (http://github.com/dutzi)",
   "license": "ISC",
