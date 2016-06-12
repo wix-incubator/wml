@@ -1,13 +1,13 @@
 {
-    "env": {
-        "node": true,
-        "es6": true
-    },
-    "rules": {
-        "strict": [1, "global"],
-        "no-underscore-dangle": 0,
-        "no-trailing-spaces": 1,
-        "no-unused-vars": 1,
-        "no-undef": 2
-    }
+	"env": {
+		"node": true,
+		"es6": true
+	},
+	"rules": {
+		"strict": [1, "global"],
+		"no-underscore-dangle": 0,
+		"no-trailing-spaces": 1,
+		"no-unused-vars": 1,
+		"no-undef": 2
+	}
 }

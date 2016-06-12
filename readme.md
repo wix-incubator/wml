@@ -27,10 +27,12 @@ wml start
 
 #### add
 
-`wml add <src> <dest>`
+`wml add <src> <dest>` (or `wml a`)
 
 Adds a link.
+
 wml will not start listening to changes until you start it by running `wml start`.
+
 Eace link is given an unique id, you can see all links and their ids by running `wml list`.
 
 #### rm
@@ -41,7 +43,7 @@ Removes a link.
 
 #### start
 
-`wml start`
+`wml start` (or `wml s`)
 
 Starts wml.
 
@@ -49,22 +51,24 @@ It first copies all watched files from source to destination folder and then wai
 
 #### list
 
-`wml list`
+`wml list` (or `wml ls`)
 
 Lists all wml.
+
 Shows link's id, state and source/destination folders.
 
 #### enable
 
-`wml enable <linkId>`
+`wml enable <linkId>` (or `wml en`)
 
 Enables a link.
 
 #### disable
 
-`wml disable <linkId>`
+`wml disable <linkId>` (or `wml d`)
 
 Disables a link.
+
 Great for re-using old links without having to type them over and over again.
 
 ## Developing

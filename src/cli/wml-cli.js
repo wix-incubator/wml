@@ -1,13 +1,25 @@
 #!/usr/bin/env node
 'use strict';
 
+var add = require('./wml-cli-add.js');
+var rm = require('./wml-cli-rm.js');
+var start = require('./wml-cli-start.js');
+var list = require('./wml-cli-list.js');
+var enable = require('./wml-cli-enable.js');
+var disable = require('./wml-cli-disable.js');
+
 require('yargs')
-    .usage('$0 <cmd> [args]')
-    .command(require('./wml-cli-add.js'))
-    .command(require('./wml-cli-rm.js'))
-    .command(require('./wml-cli-start.js'))
-    .command(require('./wml-cli-list.js'))
-    .command(require('./wml-cli-enable.js'))
-    .command(require('./wml-cli-disable.js'))
-    .help('help')
-    .argv
+	.usage('$0 <cmd> [args]')
+	.command(add)
+	.command(rm)
+	.command(start)
+	.command(list)
+	.command(enable)
+	.command(disable)
+	.command('a', false, add)
+	.command('s', false, start)
+	.command('ls', false, list)
+	.command('en', false, enable)
+	.command('d', false, disable)
+	.help('help')
+	.argv
