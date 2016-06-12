@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 'use strict';
 
-var add = require('./wml-cli-add.js');
-var rm = require('./wml-cli-rm.js');
-var start = require('./wml-cli-start.js');
-var list = require('./wml-cli-list.js');
-var enable = require('./wml-cli-enable.js');
-var disable = require('./wml-cli-disable.js');
+var add = require('./add.js');
+var rm = require('./rm.js');
+var start = require('./start.js');
+var list = require('./list.js');
+var enable = require('./enable.js');
+var disable = require('./disable.js');
 
 require('yargs')
 	.usage('$0 <cmd> [args]')
