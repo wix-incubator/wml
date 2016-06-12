@@ -9,7 +9,7 @@ var watchProject = require('../watchProject.js');
 var getConfig = require('../getConfig.js');
 var subscribe = require('../subscribe.js');
 var watchman = require('fb-watchman');
-var watchers = require('../watchers.js');
+var links = require('../links.js');
 var copyHandler = require('../handlers/copy.js');
 
 exports.command = 'start';
@@ -18,39 +18,39 @@ exports.describe = 'Starts watching all links';
 
 exports.builder = {};
 
-function onWatchersChange(onChange, resp) {
+function onLinksChange(onChange, resp) {
 	if (resp.subscription === 'mysubscription') {
-		var hasWatchersChanged = resp.files.some(function (file) {
-			return file.name === 'watchers.json'
+		var hasLinksChanged = resp.files.some(function (file) {
+			return file.name === 'links.json'
 		});
 
-		if (hasWatchersChanged) {
+		if (hasLinksChanged) {
 			onChange();
 		}
 	}
 }
 
-function watchForWatcherChanges(onChange) {
-	var watchersPath = path.resolve(__dirname, '../');
+function watchForLinkChanges(onChange) {
+	var linksPath = path.resolve(__dirname, '../');
 	return subscribe({
 		client: new watchman.Client(),
-		watch: watchersPath,
-		src: watchersPath,
-		handler: onWatchersChange.bind(this, onChange)
+		watch: linksPath,
+		src: linksPath,
+		handler: onLinksChange.bind(this, onChange)
 	});
 }
 
 exports.handler = () => {
-	watchers.load();
+	links.load();
 
-	watchForWatcherChanges(() => {
+	watchForLinkChanges(() => {
 		console.log('change!');
 	});
 
-	for (var i in watchers.data) {
-		var watcher = watchers.data[i];
+	for (var i in links.data) {
+		var link = links.data[i];
 
-		if (watcher.enabled) {
+		if (link.enabled) {
 			var client = new watchman.Client(),
 			    relativePath,
 			    watch;
@@ -61,7 +61,7 @@ exports.handler = () => {
 
 				return watchProject({
 					client: client,
-					src: watcher.src
+					src: link.src
 				});
 
 			}).then((resp) => {
@@ -77,7 +77,7 @@ exports.handler = () => {
 
 				return getConfig({
 					client: client,
-					src: watcher.src
+					src: link.src
 				});
 
 			}).then((resp) => {
@@ -88,15 +88,15 @@ exports.handler = () => {
 					client: client,
 					watch: watch,
 					relativePath: relativePath,
-					src: watcher.src,
+					src: link.src,
 					handler: copyHandler({
-						src: watcher.src,
-						dest: watcher.dest
+						src: link.src,
+						dest: link.dest
 					})
 				});
 
 			}).then(() => {
-				console.log('[subscribe]'.green, watcher.src);
+				console.log('[subscribe]'.green, link.src);
 			}, (err) => {
 
 				client.end();

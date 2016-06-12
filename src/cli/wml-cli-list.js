@@ -1,6 +1,6 @@
 'use strict';
 require('colors');
-var watchers = require('../watchers.js');
+var links = require('../links.js');
 
 exports.command = 'list';
 
@@ -9,20 +9,20 @@ exports.describe = 'Lists all links';
 exports.builder = {};
 
 exports.handler = function () {
-	watchers.load();
+	links.load();
 
 	var found;
 
-	console.log('Watchers:');
+	console.log('links:');
 
-	for (var linkId in watchers.data) {
-		var watcher = watchers.data[linkId];
-		var status = watcher.enabled ? 'enabled'.green : 'disabled'.red;
-		console.log(`${status} (${linkId}) ${watcher.src} -> ${watcher.dest}`);
+	for (var linkId in links.data) {
+		var link = links.data[linkId];
+		var status = link.enabled ? 'enabled'.green : 'disabled'.red;
+		console.log(`${status} (${linkId}) ${link.src} -> ${link.dest}`);
 		found = true;
 	}
 
 	if (!found) {
-		console.log('(no watchers set)');
+		console.log('(no links set)');
 	}
 }

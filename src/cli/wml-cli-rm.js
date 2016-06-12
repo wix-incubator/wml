@@ -1,5 +1,5 @@
 'use strict';
-var watchers = require('../watchers.js');
+var links = require('../links.js');
 
 exports.command = 'rm <linkId>';
 
@@ -8,14 +8,14 @@ exports.describe = 'Removes a link';
 exports.builder = {};
 
 exports.handler = function (argv) {
-	watchers.load();
+	links.load();
 
-	var watcher = watchers.data[argv.linkId]
-	if (watcher) {
-		delete watchers.data[argv.linkId];
-		console.log(`Discarded watcher: (${argv.linkId}) ${watcher.src} -> ${watcher.dest}`);
-		watchers.save();
+	var link = links.data[argv.linkId]
+	if (link) {
+		delete links.data[argv.linkId];
+		console.log(`Discarded link: (${argv.linkId}) ${link.src} -> ${link.dest}`);
+		links.save();
 	} else {
-		console.log(`Error: could not find watcher ${argv.linkId}`);
+		console.log(`Error: could not find link ${argv.linkId}`);
 	}
 }
