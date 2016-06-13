@@ -78,3 +78,28 @@ Enables a link.
 Disables a link.
 
 Great for re-using old links without having to type them over and over again.
+
+## Miscellaneous
+
+#### Ignored folders
+
+Wml will try to detect if your source folder is a git repository or an npm package and will offer to ignore the ".git" and "node_modules" folders for you.
+
+If you wan't to add more folders to your ignored folders simply create a file named `.watchmanconfig` in your source folder. This file should contain Watchmans configuration for this folder (check out the [Watchman docs](https://facebook.github.io/watchman/docs/config.html) to learn more). In the following example we are ignoring the ".git" and "node_modules" folders:
+
+```json
+{
+    "ignore_dirs": [
+        ".git",
+        "node_modules"
+    ]
+}
+```
+
+## Contributing
+
+See the [Contributing page](CONTRIBUTING.md).
+
+## License
+
+Copyright (c) 2016 Wix. Licensed under the MIT license.
