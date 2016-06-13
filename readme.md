@@ -83,9 +83,9 @@ Great for re-using old links without having to type them over and over again.
 
 #### Ignored folders
 
-Wml will try to detect if your source folder is a git repository or an npm package and will offer to ignore the ".git" and "node_modules" folders for you.
+When adding a new link Wml will try to detect if your source folder is a git repository or an npm package, it will then offer to ignore the ".git" and "node_modules" folders for you.
 
-If you wan't to add more folders to your ignored folders simply create a file named `.watchmanconfig` in your source folder. This file should contain Watchmans configuration for this folder (check out the [Watchman docs](https://facebook.github.io/watchman/docs/config.html) to learn more). In the following example we are ignoring the ".git" and "node_modules" folders:
+If you want to add more folders to your ignored folders first create a file named `.watchmanconfig` in your source folder, this file should contain Watchman's configuration for this folder (check out the [Watchman docs](https://facebook.github.io/watchman/docs/config.html) to learn more). In the following example we are ignoring the ".git" and "node_modules" folders:
 
 ```json
 {
