@@ -1,27 +1,30 @@
 {
-	"name": "wml",
-	"version": "0.0.0",
-	"description": "Replaces npm link with something that actually works!",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
-	"bin": {
-		"wml": "./src/cli/index.js"
-	},
-	"author": "dutzi <dutzi@wix.com> (http://github.com/dutzi)",
-	"license": "ISC",
-	"preferGlobal": true,
-	"dependencies": {
-		"colors": "^1.1.2",
-		"extend": "^3.0.0",
-		"fb-watchman": "^1.9.0",
-		"fs-extra": "^0.30.0",
-		"q": "^1.4.1",
-		"untildify": "^3.0.2",
-		"yargs": "^4.7.1"
-	},
-	"devDependencies": {
-		"babel-eslint": "^6.0.4",
-		"eslint": "^2.11.1"
-	}
+  "name": "wml",
+  "version": "0.0.0",
+  "description": "Replaces npm link with something that actually works!",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "wml": "./src/cli/index.js"
+  },
+  "author": "dutzi <dutzi@wix.com> (http://github.com/dutzi)",
+  "license": "ISC",
+  "preferGlobal": true,
+  "repository": "git@github.com:wix-private/wml.git",
+  "dependencies": {
+    "colors": "^1.1.2",
+    "extend": "^3.0.0",
+    "fb-watchman": "^1.9.0",
+    "fs-extra": "^0.30.0",
+    "inquirer": "^1.0.3",
+    "is-there": "^4.3.3",
+    "q": "^1.4.1",
+    "untildify": "^3.0.2",
+    "yargs": "^4.7.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "^6.0.4",
+    "eslint": "^2.11.1"
+  }
 }
