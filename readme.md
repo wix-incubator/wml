@@ -14,6 +14,8 @@ Wml makes use of Facebook's ultra-fast Watchman to watch for changes in your sou
 
 Wml is a CLI tool that works pretty much like `ln -s`. You first set up your links by running the `wml add` command and then run the wml service (`wml start`) to start listening. That's it!
 
+Note that since Wml is based on Watchman it **does not support symlinks**. lol.
+
 ## Install
 
 ```sh
