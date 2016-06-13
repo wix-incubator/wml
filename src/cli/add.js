@@ -17,7 +17,7 @@ function promptForIgnoredFolders(src, rules) {
 	var prompts = [];
 
 	rules.forEach((rule) => {
-		if (isThere(path.resolve(src, rule.folder))) {
+		if (isThere(path.resolve(src, rule.relPath))) {
 			prompts.push({
 				name: rule.name,
 				message: rule.message,
@@ -32,7 +32,7 @@ function promptForIgnoredFolders(src, rules) {
 
 		rules.forEach((rule) => {
 			if (answers[rule.name]) {
-				ignoredFolders.push(rule.folder);
+				ignoredFolders.push(rule.ignore);
 			}
 		});
 
@@ -70,12 +70,14 @@ exports.handler = function (argv) {
 
 	promptForIgnoredFolders(src, [{
 		name: 'git',
-		folder: '.git',
+		relPath: '.git',
+		ignore: '.git',
 		message: 'Source folder is a git repo, add `.git` to ignored folders?',
 		default: true
 	}, {
 		name: 'npm',
-		folder: 'node_modules',
+		relPath: 'package.json',
+		ignore: 'node_modules',
 		message: 'Source folder is an npm package, add `node_modules` to ignored folders?',
 		default: true
 	}]).then((ignoredFolders) => {
