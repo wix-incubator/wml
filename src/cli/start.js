@@ -19,14 +19,12 @@ exports.describe = 'Starts watching all links';
 exports.builder = {};
 
 function onLinksChange(onChange, resp) {
-	if (resp.subscription === 'mysubscription') {
-		var hasLinksChanged = resp.files.some(function (file) {
-			return file.name === 'links.json'
-		});
+	var hasLinksChanged = resp.files.some(function (file) {
+		return file.name === 'links.json'
+	});
 
-		if (hasLinksChanged) {
-			onChange();
-		}
+	if (hasLinksChanged) {
+		onChange();
 	}
 }
 
@@ -40,76 +38,113 @@ function watchForLinkChanges(onChange) {
 	});
 }
 
-exports.handler = () => {
+var watchers = [];
+
+function startWatcher(link, linkId) {
+	if (!link.enabled) {
+		return;
+	}
+
+	var client = new watchman.Client(),
+	    relativePath,
+	    watch;
+
+	watchers[linkId] = client;
+
+	capabilityCheck({
+		client: client
+	}).then(() => {
+
+		return watchProject({
+			client: client,
+			src: link.src
+		});
+
+	}).then((resp) => {
+
+		if ('warning' in resp) {
+			console.log('[watch-warning]'.yellow, resp.warning);
+		}
+
+		console.log('[watch]'.green, resp.watch);
+
+		relativePath = resp.relative_path;
+		watch = resp.watch;
+
+		return getConfig({
+			client: client,
+			src: link.src
+		});
+
+	}).then((resp) => {
+
+		console.log('[watch-config]'.green, resp.config);
+
+		return subscribe({
+			client: client,
+			watch: watch,
+			relativePath: relativePath,
+			src: link.src,
+			handler: copyHandler({
+				src: link.src,
+				dest: link.dest
+			})
+		});
+
+	}).then(() => {
+		console.log('[subscribe]'.green, link.src);
+	}, (err) => {
+
+		client.end();
+
+		var error = err.watchmanResponse
+			? err.watchmanResponse.error
+			: err;
+
+		console.log('[error]'.red, error);
+
+		throw err;
+
+	}).done();
+
+	return client;
+}
+
+function stopWatcher(watcher, src, dest) {
+	watcher.end();
+	console.log('[end]'.green, src, '->' , dest);
+}
+
+function updateWatchers() {
+	var prevLinks = links.data,
+	    i;
+
 	links.load();
 
-	watchForLinkChanges(() => {
-		console.log('change!');
-	});
+	// Create new watchers and change current watchers state
+	//
+	for (i in links.data) {
+		var link = links.data[i],
+		    prevLink = prevLinks[i] || {};
 
-	for (var i in links.data) {
-		var link = links.data[i];
-
-		if (link.enabled) {
-			var client = new watchman.Client(),
-			    relativePath,
-			    watch;
-
-			capabilityCheck({
-				client: client
-			}).then(() => {
-
-				return watchProject({
-					client: client,
-					src: link.src
-				});
-
-			}).then((resp) => {
-
-				if ('warning' in resp) {
-					console.log('[watch-warning]'.yellow, resp.warning);
-				}
-
-				console.log('[watch]'.green, resp.watch);
-
-				relativePath = resp.relative_path;
-				watch = resp.watch;
-
-				return getConfig({
-					client: client,
-					src: link.src
-				});
-
-			}).then((resp) => {
-
-				console.log('[watch-config]'.green, resp.config);
-
-				return subscribe({
-					client: client,
-					watch: watch,
-					relativePath: relativePath,
-					src: link.src,
-					handler: copyHandler({
-						src: link.src,
-						dest: link.dest
-					})
-				});
-
-			}).then(() => {
-				console.log('[subscribe]'.green, link.src);
-			}, (err) => {
-
-				client.end();
-
-				var error = err.watchmanResponse
-					? err.watchmanResponse.error
-					: err;
-
-				console.log('[error]'.red, error);
-
-				throw err;
-
-			}).done();
+		if (!prevLink.enabled && link.enabled) {
+			watchers[i] = startWatcher(links.data[i], i);
+		} else if (prevLink.enabled && !link.enabled) {
+			stopWatcher(watchers[i], link.src, link.dest);
+			delete watchers[i];
 		}
+
+		delete prevLinks[i];
 	}
+
+	// Turn off all previous watchers that didn't exists in current links list
+	//
+	for (i in prevLinks) {
+		stopWatcher(watchers[i], link.src, link.dest);
+		delete watchers[i];
+	}
+}
+
+exports.handler = () => {
+	watchForLinkChanges(updateWatchers);
 };

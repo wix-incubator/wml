@@ -2,7 +2,7 @@
 
 > Tangible symlinks
 
-Wml listens to changes in some folder (using [watchman](https://facebook.github.io/watchman/)) and copies changed files to another folder.
+Wml listens to changes in some folder (using [watchman](https://facebook.github.io/watchman/)) and copies changed files into another folder.
 
 ## Why?
 
@@ -53,7 +53,7 @@ It first copies all watched files from source to destination folder and then wai
 
 `wml list` (or `wml ls`)
 
-Lists all wml.
+Lists all links.
 
 Shows link's id, state and source/destination folders.
 

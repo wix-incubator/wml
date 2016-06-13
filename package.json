@@ -21,6 +21,7 @@
     "is-there": "^4.3.3",
     "q": "^1.4.1",
     "untildify": "^3.0.2",
+    "uuid-js": "^0.7.5",
     "yargs": "^4.7.1"
   },
   "devDependencies": {

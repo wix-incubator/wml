@@ -5,6 +5,8 @@ var path = require('path');
 
 var linksPath = path.resolve(__dirname, 'links.json');
 
+module.exports.data = [];
+
 module.exports.load = function() {
 	var links;
 

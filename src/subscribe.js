@@ -1,6 +1,7 @@
 'use strict';
 
 var Q = require('q');
+var uuid = require('uuid-js');
 
 module.exports = function (params) {
 	var deferred = Q.defer();
@@ -17,10 +18,12 @@ module.exports = function (params) {
 		sub.relative_root = params.relativePath;
 	}
 
+	var subscriptionId = uuid.create().toString();
+
 	params.client.command([
 		'subscribe',
 		params.watch,
-		'mysubscription',
+		subscriptionId,
 		sub
 	], (error, resp) => {
 		if (error) {
@@ -31,7 +34,7 @@ module.exports = function (params) {
 	});
 
 	params.client.on('subscription', function (resp) {
-		if (resp.subscription == 'mysubscription') {
+		if (resp.subscription === subscriptionId) {
 			params.handler(resp);
 		}
 	});
