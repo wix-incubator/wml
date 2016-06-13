@@ -6,7 +6,11 @@ Wml listens to changes in some folder (using [watchman](https://facebook.github.
 
 ## Why?
 
-todo
+Somtimes symbolic linking just isn't enough. React native's packager [doesn't support them](http://webpack.github.io/docs/troubleshooting.html#npm-linked-modules-doesn-t-find-their-dependencies). Webpack [cannot find linked modules dependencies](http://webpack.github.io/docs/troubleshooting.html#npm-linked-modules-doesn-t-find-their-dependencies), and working around this has issues of its own. A lot of people resolve to working directly from the node_modules folder in these case, but *a.* if your package is required by two projects on which you are working simultaneously- your stuck, and *b.* it just feels wrong.
+
+Wml makes use of Facebook's ultra-fast Watchman to watch for changes in your source folder and copy them (and only them) into your destination folder.
+
+Wml is a CLI tool that works pretty much like `ln -s`. You first set up your links by running the `wml add` command and then run the wml service (`wml start`) to start listening. That's it!
 
 ## Install
 
