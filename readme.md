@@ -2,11 +2,13 @@
 
 > Tangible symlinks
 
-Wml listens to changes in some folder (using [watchman](https://facebook.github.io/watchman/)) and copies changed files into another folder.
+Wml listens to changes in some folder (using [Watchman](https://facebook.github.io/watchman/)) and copies changed files into another folder.
 
 ## Why?
 
-Sometimes symbolic linking just isn't enough. React native's packager [doesn't support them](http://webpack.github.io/docs/troubleshooting.html#npm-linked-modules-doesn-t-find-their-dependencies). Webpack [cannot find linked modules dependencies](http://webpack.github.io/docs/troubleshooting.html#npm-linked-modules-doesn-t-find-their-dependencies), and working around this has issues of its own. A lot of people resolve to working directly from the node_modules folder in these cases, but *a.* if your package is required by two projects on which you are working simultaneously, your stuck, and *b.* it just feels wrong.
+Sometimes symbolic linking just isn't enough. Github has more than 10K [issues with the words "support for symlinks" in them](https://github.com/search?utf8=✓&q=support+for+symlinks&type=Issues). 
+
+Two examples I've encoutered were: React Native's packager [doesn't support them](https://github.com/facebook/react-native/issues/637) and Webpack [cannot find linked modules dependencies](http://webpack.github.io/docs/troubleshooting.html#npm-linked-modules-doesn-t-find-their-dependencies) (working around this has issues of its own). A lot of people resolve to working directly from the node_modules folder in these cases, but *a.* if your package is required by two projects on which you are working simultaneously, your stuck, and *b.* it just feels wrong.
 
 Wml makes use of Facebook's ultra-fast Watchman to watch for changes in your source folder and copy them (and only them) into your destination folder.
 
