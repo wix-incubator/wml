@@ -13,7 +13,7 @@ exports.handler = function () {
 
 	var found;
 
-	console.log('links:');
+	console.log('Links:');
 
 	for (var linkId in links.data) {
 		var link = links.data[linkId];
