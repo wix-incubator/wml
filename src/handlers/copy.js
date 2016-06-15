@@ -11,9 +11,13 @@ module.exports = function (config) {
 				var src = path.join(config.src, f.name),
 				    dest = path.join(config.dest, f.name);
 
-				console.log('[copy]', src, '->', dest);
-				// console.log('[copy]', f.name);
-				fs.copy(src, dest);
+				if (f.exists) {
+					console.log('[copy]', src, '->', dest);
+					fs.copy(src, dest);
+				} else {
+					console.log('[delete]', dest);
+					fs.remove(dest);
+				}
 			}
 		}
 	}
