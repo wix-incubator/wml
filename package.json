@@ -3,7 +3,10 @@
   "version": "0.0.0",
   "description": "Replaces npm link with something that actually works!",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublish": ":",
+    "build": ":",
+    "release": "wnpm-release -- --no-shrinkwrap"
   },
   "bin": {
     "wml": "./src/cli/index.js"
@@ -11,7 +14,14 @@
   "author": "dutzi <dutzi@wix.com> (http://github.com/dutzi)",
   "license": "MIT",
   "preferGlobal": true,
-  "repository": "git@github.com:wix-private/wml.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wix/wml.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wix/wml/issues"
+  },
+  "homepage": "https://github.com/wix/wml#readme",
   "dependencies": {
     "colors": "^1.1.2",
     "extend": "^3.0.0",
@@ -25,7 +35,11 @@
     "yargs": "^4.7.1"
   },
   "devDependencies": {
+    "@wix/wnpm-ci": "^6.1.0",
     "babel-eslint": "^6.0.4",
     "eslint": "^2.11.1"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
   }
 }

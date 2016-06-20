@@ -4,7 +4,7 @@ Thanks for coming! Contributions of any kind are welcome.
 
 ## Setup
 
-* Fork [Wml](https://github.com/wix-private/wml)
+* Fork [Wml](https://github.com/wix/wml)
 * Clone your fork
 * In your `wml` directory, run `npm i`
 
