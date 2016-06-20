@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "Replaces npm link with something that actually works!",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": ":",
     "prepublish": ":",
     "build": ":",
     "release": "wnpm-release -- --no-shrinkwrap"
