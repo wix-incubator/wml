@@ -9,7 +9,7 @@
     "wml": "./src/cli/index.js"
   },
   "author": "dutzi <dutzi@wix.com> (http://github.com/dutzi)",
-  "license": "ISC",
+  "license": "MIT",
   "preferGlobal": true,
   "repository": "git@github.com:wix-private/wml.git",
   "dependencies": {
