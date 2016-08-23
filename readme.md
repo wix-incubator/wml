@@ -49,7 +49,7 @@ your configuration is specific to that `wml` install.
 
 `wml rm <linkId>`
 
-Removes a link.
+Removes a link. Passing `all` as linkId removes all links.
 
 #### start
 
@@ -71,13 +71,13 @@ Shows each link's id, state and source/destination folders.
 
 `wml enable <linkId>` (or `wml en`)
 
-Enables a link.
+Enables a link. Passing `all` as linkId enables all links.
 
 #### disable
 
 `wml disable <linkId>` (or `wml d`)
 
-Disables a link.
+Disables a link. Passing `all` as linkId disabled all links.
 
 Great for re-using old links without having to type them over and over again.
 
