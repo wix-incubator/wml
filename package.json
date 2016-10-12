@@ -6,7 +6,7 @@
     "test": ":",
     "prepublish": ":",
     "build": ":",
-    "release": "wnpm-release -- --no-shrinkwrap"
+    "release": "npm install @wix/wnpm-ci && wnpm-release -- --no-shrinkwrap"
   },
   "bin": {
     "wml": "./src/cli/index.js"
@@ -35,7 +35,6 @@
     "yargs": "^4.7.1"
   },
   "devDependencies": {
-    "@wix/wnpm-ci": "^6.1.0",
     "babel-eslint": "^6.0.4",
     "eslint": "^2.11.1"
   },
