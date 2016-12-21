@@ -69,15 +69,19 @@ Shows each link's id, state and source/destination folders.
 
 #### enable
 
-`wml enable <linkId>` (or `wml en`)
+`wml enable [linkId]` (or `wml en`)
 
 Enables a link. Passing `all` as linkId enables all links.
 
+If you don't specify a linkId WML will open in interactive mode.
+
 #### disable
 
-`wml disable <linkId>` (or `wml d`)
+`wml disable [linkId]` (or `wml d`)
 
 Disables a link. Passing `all` as linkId disabled all links.
+
+If you don't specify a linkId WML will open in interactive mode.
 
 Great for re-using old links without having to type them over and over again.
 
