@@ -73,7 +73,7 @@ Shows each link's id, state and source/destination folders.
 
 Enables a link. Passing `all` as linkId enables all links.
 
-If you don't specify a linkId WML will open in interactive mode.
+If you don't specify a linkId wml will open in interactive mode.
 
 #### disable
 
@@ -81,7 +81,7 @@ If you don't specify a linkId WML will open in interactive mode.
 
 Disables a link. Passing `all` as linkId disabled all links.
 
-If you don't specify a linkId WML will open in interactive mode.
+If you don't specify a linkId wml will open in interactive mode.
 
 Great for re-using old links without having to type them over and over again.
 
