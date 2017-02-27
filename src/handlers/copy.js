@@ -20,5 +20,10 @@ module.exports = function (config) {
 				}
 			}
 		}
+
+		if (config.onExecuted)
+		{
+			config.onExecuted();
+		}
 	}
 }
