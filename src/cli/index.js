@@ -7,11 +7,13 @@ var start = require('./start.js');
 var list = require('./list.js');
 var enable = require('./enable.js');
 var disable = require('./disable.js');
+var once = require('./once.js');
 
 require('yargs')
 	.usage('$0 <cmd> [args]')
 	.command(add)
 	.command(rm)
+	.command(once)
 	.command(start)
 	.command(list)
 	.command(enable)
