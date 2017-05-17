@@ -11,7 +11,12 @@ exports.command = 'add <src> <dest>';
 
 exports.describe = 'Adds a link';
 
-exports.builder = {};
+exports.builder = {
+	'skip-prompt': {
+		default: false,
+		describe: 'Skips the prompt asking to setup ignored folders'
+	}
+};
 
 function promptForIgnoredFolders(src, rules) {
 	var prompts = [];
@@ -68,7 +73,7 @@ exports.handler = function (argv) {
 		}
 	}
 
-	promptForIgnoredFolders(src, [{
+    const prompt = argv.skipPrompt !== 'true' ? promptForIgnoredFolders(src, [{
 		name: 'git',
 		relPath: '.git',
 		ignore: '.git',
@@ -80,7 +85,9 @@ exports.handler = function (argv) {
 		ignore: 'node_modules',
 		message: 'Source folder is an npm package, add `node_modules` to ignored folders?',
 		default: true
-	}]).then((ignoredFolders) => {
+	}]) : Promise.resolve([])
+        
+	prompt.then((ignoredFolders) => {
 		var watchmanConfigPath = path.resolve(src, '.watchmanconfig');
 
 		var watchmanConfig = (() => {
