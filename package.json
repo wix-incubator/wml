@@ -6,7 +6,7 @@
     "test": ":",
     "prepublish": ":",
     "build": ":",
-    "release": "npm install @wix/wnpm-ci && wnpm-release -- --no-shrinkwrap"
+    "release": "npm install wnpm-ci --no-save && wnpm-release -- --no-shrinkwrap"
   },
   "bin": {
     "wml": "./src/cli/index.js"
