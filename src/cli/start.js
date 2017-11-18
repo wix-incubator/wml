@@ -6,11 +6,13 @@ var path = require('path');
 
 var capabilityCheck = require('../capabilityCheck.js');
 var watchProject = require('../watchProject.js');
+var watchDel = require('../watchDel.js')
 var getConfig = require('../getConfig.js');
 var subscribe = require('../subscribe.js');
 var watchman = require('fb-watchman');
 var links = require('../links.js');
 var copyHandler = require('../handlers/copy.js');
+var fs = require('fs-extra')
 
 exports.command = 'start';
 
@@ -51,8 +53,22 @@ function startWatcher(link, linkId) {
 
 	watchers[linkId] = client;
 
+
 	capabilityCheck({
 		client: client
+	}).then(() => {
+
+		console.log('Clean target'.green, link.dest)				
+
+		return fs.emptyDir(link.dest);
+
+	}).then(() => {
+
+		return watchDel({
+			client: client,
+			src: link.src
+		});
+
 	}).then(() => {
 
 		return watchProject({
