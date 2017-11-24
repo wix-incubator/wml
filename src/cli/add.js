@@ -63,12 +63,14 @@ exports.handler = function (argv) {
 	for (i in links.data) {
 		if (links.data[i].src === src &&
 		    links.data[i].dest === dest) {
-			console.log('Error: link already exists');
+			console.log(`Error: link already exists ${src} -> ${dest}`);
 			return;
 		}
 	}
 
-	promptForIgnoredFolders(src, [{
+	console.log(`Adding ${src} -> ${dest}`)
+
+	return promptForIgnoredFolders(src, [{
 		name: 'git',
 		relPath: '.git',
 		ignore: '.git',
