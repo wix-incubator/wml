@@ -6,11 +6,13 @@ var path = require('path');
 
 var capabilityCheck = require('../capabilityCheck.js');
 var watchProject = require('../watchProject.js');
+var watchDel = require('../watchDel.js')
 var getConfig = require('../getConfig.js');
 var subscribe = require('../subscribe.js');
 var watchman = require('fb-watchman');
 var links = require('../links.js');
 var copyHandler = require('../handlers/copy.js');
+var fs = require('fs-extra')
 
 exports.command = 'start';
 
@@ -51,8 +53,29 @@ function startWatcher(link, linkId) {
 
 	watchers[linkId] = client;
 
+
 	capabilityCheck({
 		client: client
+	}).then(() => {
+
+		console.log('Clean target'.green, link.dest)				
+
+		return new Promise((resolve,reject)=>{
+			fs.emptyDir(link.dest);
+			setTimeout(()=>resolve(), 500)
+		})
+
+	}).then(() => {
+
+		console.log('Deleting old watch'.green, link.src)				
+
+		return watchDel({
+			client: client,
+			src: link.src
+		}).catch((err)=>{
+			console.log("...already deleted")
+		});
+
 	}).then(() => {
 
 		return watchProject({
