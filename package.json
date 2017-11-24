@@ -1,27 +1,61 @@
 {
-  "name": "wml",
-  "version": "0.0.0",
-  "description": "Replaces npm link with something that actually works!",
-  "scripts": {
-    "test": ":",
-    "prepublish": ":",
-    "build": ":",
-    "release": "npm install wnpm-ci --no-save && wnpm-release -- --no-shrinkwrap"
+  "_args": [
+    [
+      {
+        "raw": "wml",
+        "scope": null,
+        "escapedName": "wml",
+        "name": "wml",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "/Volumes/Data/Sites/neighborplate/app/app"
+    ]
+  ],
+  "_from": "wml@latest",
+  "_id": "wml@0.0.83",
+  "_inCache": true,
+  "_location": "/wml",
+  "_nodeVersion": "6.11.3",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/wml-0.0.83.tgz_1508240157199_0.2210600816179067"
+  },
+  "_npmUser": {
+    "name": "wix-ci",
+    "email": "ci@wix.com"
+  },
+  "_npmVersion": "5.3.0",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "wml",
+    "scope": null,
+    "escapedName": "wml",
+    "name": "wml",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/wml/-/wml-0.0.83.tgz",
+  "_shasum": "dac784f24f06c5f007262908d229a4bdbd730457",
+  "_shrinkwrap": null,
+  "_spec": "wml",
+  "_where": "/Volumes/Data/Sites/neighborplate/app/app",
+  "author": {
+    "name": "dutzi",
+    "email": "dutzi@wix.com",
+    "url": "http://github.com/dutzi"
   },
   "bin": {
     "wml": "./src/cli/index.js"
   },
-  "author": "dutzi <dutzi@wix.com> (http://github.com/dutzi)",
-  "license": "MIT",
-  "preferGlobal": true,
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/wix/wml.git"
-  },
   "bugs": {
     "url": "https://github.com/wix/wml/issues"
   },
-  "homepage": "https://github.com/wix/wml#readme",
   "dependencies": {
     "colors": "^1.1.2",
     "extend": "^3.0.0",
@@ -33,16 +67,48 @@
     "promise-sequential": "^1.1.1",
     "inquirer": "^1.2.3",
     "is-there": "^4.3.3",
+    "lodash": "^4.17.4",
+    "promise-sequential": "^1.1.1",
     "q": "^1.4.1",
     "untildify": "^3.0.2",
     "uuid-js": "^0.7.5",
     "yargs": "^4.7.1"
   },
+  "description": "Replaces npm link with something that actually works!",
   "devDependencies": {
     "babel-eslint": "^6.0.4",
     "eslint": "^2.11.1"
   },
+  "directories": {},
+  "dist": {
+    "integrity": "sha512-t/atXKIcMLIvMIReoPGELN+JkpjF6B661dWuJjKYNydX3N7M0vUYiy8UP3oxIUyO+b0tOwuRKKW/VsPka0Hfjw==",
+    "shasum": "dac784f24f06c5f007262908d229a4bdbd730457",
+    "tarball": "https://registry.npmjs.org/wml/-/wml-0.0.83.tgz"
+  },
+  "homepage": "https://github.com/wix/wml#readme",
+  "license": "MIT",
+  "maintainers": [
+    {
+      "name": "wix-ci",
+      "email": "ci@wix.com"
+    }
+  ],
+  "name": "wml",
+  "optionalDependencies": {},
+  "preferGlobal": true,
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
-  }
+  },
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wix/wml.git"
+  },
+  "scripts": {
+    "build": ":",
+    "prepublish": ":",
+    "release": "npm install wnpm-ci --no-save && wnpm-release -- --no-shrinkwrap",
+    "test": ":"
+  },
+  "version": "0.0.83"
 }
