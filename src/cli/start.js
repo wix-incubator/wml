@@ -60,15 +60,6 @@ function startWatcher(link, linkId) {
 
 		console.log('Clean target'.green, link.dest)				
 
-<<<<<<< Updated upstream
-		return fs.emptyDir(link.dest);
-
-	}).then(() => {
-
-		return watchDel({
-			client: client,
-			src: link.src
-=======
 		return new Promise((resolve,reject)=>{
 			fs.emptyDir(link.dest);
 			setTimeout(()=>resolve(), 500)
@@ -83,7 +74,6 @@ function startWatcher(link, linkId) {
 			src: link.src
 		}).catch((err)=>{
 			console.log("...already deleted")
->>>>>>> Stashed changes
 		});
 
 	}).then(() => {
