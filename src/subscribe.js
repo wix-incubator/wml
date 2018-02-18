@@ -9,7 +9,7 @@ module.exports = function (params) {
 	var sub = {
 		expression: [
 			'allof',
-			['match', '*'],
+			['match', '*', 'basename', {'includedotfiles': true}],
 		],
 		fields: ['name', 'size', 'exists', 'type']
 	};
