@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^6.0.4",
-    "eslint": "^2.11.1"
+    "eslint": "^6.6.0"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
