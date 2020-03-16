@@ -32,7 +32,7 @@
     "q": "^1.4.1",
     "untildify": "^3.0.2",
     "uuid-js": "^0.7.5",
-    "yargs": "^4.7.1"
+    "yargs": "^13.1.0"
   },
   "devDependencies": {
     "babel-eslint": "^6.0.4",
